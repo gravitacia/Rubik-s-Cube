@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/kosar/CLionProjects/rubiksCube/Cube.h
+vector
+-
+iostream
+-
+fstream
+-
+SolvingAlgorithm.h
+C:/Users/kosar/CLionProjects/rubiksCube/SolvingAlgorithm.h
+
+C:/Users/kosar/CLionProjects/rubiksCube/SolvingAlgorithm.h
+vector
+-
+iostream
+-
+fstream
+-
+
+C:/Users/kosar/CLionProjects/rubiksCube/main.cpp
+SolvingAlgorithm.h
+C:/Users/kosar/CLionProjects/rubiksCube/SolvingAlgorithm.h
+Cube.h
+C:/Users/kosar/CLionProjects/rubiksCube/Cube.h
+fstream
+-
+random
+-
+time.h
+-
+
