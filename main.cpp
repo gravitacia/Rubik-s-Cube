@@ -99,7 +99,7 @@ int main()
                 scrambleCommand();
                 string str;
                 cin >> str;
-                //cube = cube.scramblingCube(str, cube.getCube());
+                cube = cube.scramblingCube(str, cube.getCube());
                 cube.antiScrambleCommand(str);
 
                 cout << "Choose output reference: " << endl;
