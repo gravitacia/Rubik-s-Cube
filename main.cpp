@@ -26,12 +26,7 @@ void scrambleCommand(){
 
 int main()
 {
-    srand (time(NULL));
-
-    char color[6] = {'W', 'B', 'R', 'G', 'O', 'Y'};
-    /// вектор для чтения кубика из файла и случайной генерации
-    vector<vector<char>> fileCube(6, vector<char>(9));
-    vector<vector<char>> genCube(6, vector<char>(9));
+    srand(time(NULL));
 
     char ans = 'y';
 
@@ -41,6 +36,7 @@ int main()
 
         cout << "Choose import reference " << endl;
         cout << "Type F for file or type C for console:" << endl;
+        vector<vector<char>> vec;
 
         char answer;
         cin >> answer;
@@ -53,17 +49,10 @@ int main()
 
             if (answer == 'G' || answer == 'g') {
 
-                for (int i = 0; i < 6; i++) {
-                    for (int j = 0; j < 9; j++) {
-                        char ch = color[i];
-                        genCube[i][j] = ch;
-                    }
-                }
-
-                cube.generateCube(genCube);
+                cube.generateCube();
 
                 cout << "Generated cube is" << endl;
-                cube.printingCube(genCube);
+                cube.PrintingCube();
 
                 cout << "Do you want to scramble this cube more?(y/n)" << endl;
                 cin >> answer;
@@ -71,7 +60,7 @@ int main()
                     scrambleCommand();
                     string str;
                     cin >> str;
-                    genCube = cube.scramblingCube(str, genCube);
+                    cube.scramblingCube(str);
                 }
 
 
@@ -82,15 +71,11 @@ int main()
                 if (answer == 'C' || answer == 'c') {
 
                     cout << " Solving Rubik's Cube..... " << endl;
-                    cube.solvingCube(genCube);
+                    cube.SolvingByAlgorithm(cube.getCube());
                     cout << endl;
 
-                    cout << endl;
-                    cout << " Solved Rubik's cube is..... " << endl;
-                    cube.PrintingCube(genCube);
                 } else {
-                    cube.solvingCube(cube.getCube());
-                    cube.PrintingCubeInFile(cube.getCube());
+                    cube.SolvingByAlgorithm(cube.getCube());
                 }
             }
 
@@ -99,7 +84,7 @@ int main()
                 scrambleCommand();
                 string str;
                 cin >> str;
-                cube = cube.scramblingCube(str, cube.getCube());
+                cube.scramblingCube(str);
                 cube.antiScrambleCommand(str);
 
                 cout << "Choose output reference: " << endl;
@@ -110,26 +95,36 @@ int main()
 
                     cout << endl;
                     cout << " Scrambled Cube is....." << endl;
-                    cube.PrintingCube(cube.getCube());
+                    cube.PrintingCube();
 
                     cout << " Solving Rubik's Cube..... " << endl;
-                    cube.solvingCube(cube.getCube());
+                    cube.SolvingByAlgorithm(cube.getCube());
                     cout << endl;
                 }
 
                 else{
-                    cube.solvingCube(genCube);
-                    cube.PrintingCubeInFile(genCube);
+                    cube.SolvingByAlgorithm(cube.getCube());
                 }
             }
         }
 
         else if (answer == 'F' || answer == 'f') {
 
-            cube.getFileCube(fileCube);
-            if (!cube.validColors(fileCube))
+            cube.getFileCube();
+            if (!cube.validColors(cube.getCube()))
                 continue;
 
+            cout << "Cube from file" << endl;
+            cube.PrintingCube();
+
+            cout << "Do you want to scramble this cube more?(y/n)" << endl;
+            cin >> answer;
+            if (answer == 'y' || answer == 'Y'){
+                scrambleCommand();
+                string str;
+                cin >> str;
+                cube.scramblingCube(str);
+            }
 
             cout << "Choose output reference: " << endl;
             cout << "Type C for console or type F for file:" << endl;
@@ -139,21 +134,17 @@ int main()
 
                 cout << endl;
                 cout << " Scrambled Cube is....." << endl;
-                cube.PrintingCube(fileCube);
+                cube.PrintingCube();
 
                 cout << " Solving Rubik's Cube..... " << endl;
-                cube.solvingCube(fileCube);
+                cube.SolvingByAlgorithm(cube.getCube());
                 cout << endl;
             }
             else{
-                cube.solvingCube(fileCube);
-                cube.PrintingCubeInFile(fileCube);
+                cube.SolvingByAlgorithm(cube.getCube());
             }
 
         }
-        else cout << "Exeption" << endl;
-
-
 
         cout << " Want to Solve again? (y/n): ";
         cin >> ans;

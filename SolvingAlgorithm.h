@@ -16,10 +16,11 @@ class SolvingAlgorithm {
 public:
 
     void printingCube(vector<vector<char>> vec);
+    void printingCubeInFile(vector<vector<char>> vec);
     bool validColors(vector<vector<char>> vec);
     void antiScrambleCommand(string str);
 
-    vector<vector<char>> scramblingCube(string str, vector<vector<char>> vec);
+
 
 /// Solution
     vector<vector<char>> SolvingByAlgorithm(vector<vector<char>> vec);

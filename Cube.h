@@ -27,19 +27,20 @@ public:
             }
         }
     }
+
     vector<vector<char>> getCube()
     {
         return cubeVec;
     }
 
-    void PrintingCube(vector<vector<char>> V);
-    void PrintingCubeInFile(vector<vector<char>> V);
-    bool validCube(vector<vector<char>> V);
-    void generateCube(vector<vector<char>> &V);
-    void getFileCube(vector<vector<char>> &V);
-    void solvingCube(vector<vector<char>> V);
+    void PrintingCube();
+    void PrintingCubeInFile();
+    bool validCube();
+    void generateCube();
+    void getFileCube();
+    vector<vector<char>> scramblingCube(string str);
 
-    Cube(vector<vector<char>> vector);
+
 };
 
 

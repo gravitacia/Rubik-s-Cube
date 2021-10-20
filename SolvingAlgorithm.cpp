@@ -52,82 +52,74 @@ void SolvingAlgorithm::printingCube(vector<vector<char>> vec)
 
 }
 
-vector<vector<char>> SolvingAlgorithm::scramblingCube(string str, vector<vector<char>> vec){
-    for (int i = 0; i < str.length(); i++)
+void SolvingAlgorithm::printingCubeInFile(vector<vector<char>> vec)
+{
+    ofstream fout;
+    fout.open("solved.txt", ios_base::out | ios_base::app);
+    /// Printing WHITE Layer...
+    fout << endl;
+    int cnt = 0;
+    fout << "\t           ---------" << endl;
+    for (int i = 0; i < 3; i++)
     {
-        char ch = str.at(i);
-        if (islower(ch))
+        fout << "\t           ";
+        fout << "| ";
+        for (int j = 0; j < 3; j++)
         {
-            ch = toupper(ch);
+            fout << vec[0][cnt] << " ";
+            cnt++;
         }
-        if (ch == 'A' || ch == 'M' || ch == 'Y')
-        {
-            vec = Blue_Right_Clock(vec);
-        }
-        else if (ch == 'B' || ch == 'N' || ch == 'Z')
-        {
-            vec = Blue_Right_Anti_Clock(vec);
-        }
-        else if (ch == 'C' || ch == 'O')
-        {
-            vec = Blue_Left_Clock(vec);
-        }
-        else if (ch == 'D' || ch == 'P')
-        {
-            vec = Blue_Left_Anti_Clock(vec);
-        }
-        else if (ch == 'E' || ch == 'Q')
-        {
-            vec = Blue_Up_Clock(vec);
-        }
-        else if (ch == 'F' || ch == 'R')
-        {
-            vec = Blue_Up_Anti_Clock(vec);
-        }
-        else if (ch == 'G' || ch == 'S')
-        {
-            vec = Blue_Down_Clock(vec);
-        }
-        else if (ch == 'H' || ch == 'T')
-        {
-            vec = Blue_Down_Anti_Clock(vec);
-        }
-        else if (ch == 'I' || ch == 'U')
-        {
-            vec = Blue_Front_Clock(vec);
-        }
-        else if (ch == 'J' || ch == 'V')
-        {
-            vec = Blue_Front_Anti_Clock(vec);
-        }
-        else if (ch == 'K' || ch == 'W')
-        {
-            vec = Blue_Back_Clock(vec);
-        }
-        else if (ch == 'L' || ch == 'X')
-        {
-            vec = Blue_Back_Anti_Clock(vec);
-        }
+        fout << "|" << endl;
     }
-    return vec;
+    fout << "\t           ---------" << endl;
+
+    /// Printing RED, BLUE, ORANGE and GREEN Layer...
+    fout << "\t --------- --------- --------- ---------" << endl;
+    for (int j = 0; j < 9; j += 3)
+    {
+        fout << "\t | " << vec[2][j] << " " << vec[2][j + 1] << " " << vec[2][j + 2] << " | ";
+        fout << "| " << vec[1][j] << " " << vec[1][j + 1] << " " << vec[1][j + 2] << " | ";
+        fout << "| " << vec[4][j] << " " << vec[4][j + 1] << " " << vec[4][j + 2] << " | ";
+        fout << "| " << vec[3][j] << " " << vec[3][j + 1] << " " << vec[3][j + 2] << " | ";
+        fout << endl;
+    }
+    fout << "\t --------- --------- --------- ---------" << endl;
+
+    /// Printing YELLOW Layer...
+    cnt = 0;
+    fout << "\t           ---------" << endl;
+    for (int i = 0; i < 3; i++)
+    {
+        fout << "\t           ";
+        fout << "| ";
+        for (int j = 0; j < 3; j++)
+        {
+            fout << vec[5][cnt] << " ";
+            cnt++;
+        }
+        fout << "|" << endl;
+    }
+    fout << "\t           ---------" << endl;
+    fout << endl;
+
 }
 
 void SolvingAlgorithm::antiScrambleCommand(string str){
     string antistr;
     char com[12] = {'A','B','C','D','E','F','G','H','I','J','K','L'};
-    for (int i = 0; i < str.length(); i++){
-        if (str[i] == 'A') cout << com[1];
-        else if (str[i] == 'B') cout << com[0];
-        else if (str[i] == 'C') cout << com[3];
-        else if (str[i] == 'D') cout << com[2];
-        else if (str[i] == 'E') cout << com[5];
-        else if (str[i] == 'F') cout << com[4];
-        else if (str[i] == 'G') cout << com[7];
-        else if (str[i] == 'H') cout << com[6];
-        else if (str[i] == 'I') cout << com[9];
-        else if (str[i] == 'J') cout << com[8];
-        else if (str[i] == 'K') cout << com[11];
-        else if (str[i] == 'L') cout << com[10];
+    for (int i = str.length(); i >= 0; i--){
+        if (str[i] == 'A' || str[i] == 'a') cout << com[1];
+        else if (str[i] == 'B' || str[i] == 'b') cout << com[0];
+        else if (str[i] == 'C' || str[i] == 'c') cout << com[3];
+        else if (str[i] == 'D' || str[i] == 'd') cout << com[2];
+        else if (str[i] == 'E' || str[i] == 'e') cout << com[5];
+        else if (str[i] == 'F' || str[i] == 'f') cout << com[4];
+        else if (str[i] == 'G' || str[i] == 'g') cout << com[7];
+        else if (str[i] == 'H' || str[i] == 'h') cout << com[6];
+        else if (str[i] == 'I' || str[i] == 'i') cout << com[9];
+        else if (str[i] == 'J' || str[i] == 'j') cout << com[8];
+        else if (str[i] == 'K' || str[i] == 'k') cout << com[11];
+        else if (str[i] == 'L' || str[i] == 'l') cout << com[10];
 
     }
     cout << " is combination to solve the cube " << antistr << endl;
@@ -475,6 +467,7 @@ vector<vector<char>> SolvingAlgorithm::SolvingByAlgorithm(vector<vector<char>> v
 
     cout << "  Stage 1 Completed... Solved the WHITE CROSS" << endl;
     printingCube(vec);
+    printingCubeInFile(vec);
 
 
     /**
@@ -674,6 +667,7 @@ vector<vector<char>> SolvingAlgorithm::SolvingByAlgorithm(vector<vector<char>> v
 
     cout << "  Stage 2 Completed... Solved the UPPER LAYER" << endl;
     printingCube(vec);
+    printingCubeInFile(vec);
 
 
     /**
@@ -995,6 +989,7 @@ vector<vector<char>> SolvingAlgorithm::SolvingByAlgorithm(vector<vector<char>> v
 
     cout << "  Stage 3 Completed... Solved the MIDDLE LAYER" << endl;
     printingCube(vec);
+    printingCubeInFile(vec);
 
     /**
      *   Stage 4 : Solving YELLOW CROSS in BOTTOM Layer
@@ -1078,6 +1073,7 @@ vector<vector<char>> SolvingAlgorithm::SolvingByAlgorithm(vector<vector<char>> v
 
     cout << "  Stage 4 Completed... Solved the YELLOW CROSS" << endl;
     printingCube(vec);
+    printingCubeInFile(vec);
 
     /**
      *   Stage 5 : Solving YELLOW CORNERS in Bottom Layer
@@ -1229,6 +1225,7 @@ vector<vector<char>> SolvingAlgorithm::SolvingByAlgorithm(vector<vector<char>> v
 
     cout << "  Stage 5 Completed... Solved the YELLOW LAYER" << endl;
     printingCube(vec);
+    printingCubeInFile(vec);
 
     /**
      *   Stage 6 : Solving RED, BLUE, ORANGE & GREEN CORNERS in BOTTOM Layer
@@ -1372,6 +1369,7 @@ vector<vector<char>> SolvingAlgorithm::SolvingByAlgorithm(vector<vector<char>> v
 
     cout << "  Stage 6 Completed... Solved the CORNERS of BOTTOM LAYER" << endl;
     printingCube(vec);
+    printingCubeInFile(vec);
 
     /**
      *   Stage 7 : Solving RED, BLUE, ORANGE & GREEN EDGES in BOTTOM LAYER
@@ -1554,8 +1552,8 @@ vector<vector<char>> SolvingAlgorithm::SolvingByAlgorithm(vector<vector<char>> v
     }
     cout << "  Stage 7 Completed... Solved the BOTTOM LAYER" << endl;
     printingCube(vec);
+    printingCubeInFile(vec);
     cout <<endl;
-
-    cout << " Solved Rubik's Cube: " << endl;
+    
     return vec;
 }
